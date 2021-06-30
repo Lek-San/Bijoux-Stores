@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}{{ parent() }} | Catalogue{% endblock %}
+
+{% block titreh1 %}Catalogue{% endblock %}
+
+
+
+{% block body %}
+
+    
+    {% if produits %} {# Si le tableau produits n'est pas vide   :    if produits is not empty     #}
+
+
+        {# $produits est un tableau multidimensionnel c'est-à-dire que c'est un tableau ayant comme valeurs des tableaux. 
+        ici chaque tableau à l'interieur est un produit (une ligne de la table Produit, il contient id nom prix image createdAt)
+        #}
+        <div class="row justify-content-around">
+
+            {% for produit in produits %}
+                
+                <div class="border border-dark col-md-3 m-2 text-center">
+                    {# <div>{{ produit.id }}</div> #}
+                    <div>{{ produit.nom }}</div>
+                    <div>{{ produit.prix }} €</div>
+                    <div>{{ produit.createdAt|date("d/m/Y à H:i:s") }}</div>
+                    {# la date n'est pas une string c'est une date, on doit définir son format
+                    fonction twig date() permet de formater la date
+                    dans la fonction donner les lettres d m Y H i s etc....
+                    #}
+                
+
+                    {% if produit.image is not empty %} {# s'il y a le nom d'une image dans la bdd #}
+
+                        <img src="{{ asset('images/imagesUpload/' ~ produit.image) }}" style='width:100px' alt="">
+                        {# la concaténation en twig est avec le tilde ~  (ALT GR + é ) #}
+
+                    {% else %}{# le champ image dans la bdd est NULL #}
+                        <img src="{{ asset('images/imageDefault.jpg') }}" style='width:100px' alt="">
+                    {% endif %}
+
+
+                    <a class="btn btn-danger text-center mt-3 mb-3 col-12" href="{{    path('fiche_produit' , { 'id' : produit.id }    )    }}">Voir la fiche</a>
+
+
+                    {#
+                        Dans ce lien, le 2e argument contient l'id du produit
+                        la route fiche_produit doit contenir l'id car on ne crée qu'une seule route mais son contenu dépendra de l'id
+                    
+                     #}
+
+                </div>{# fermeture de la boîte / card #}
+
+
+            {% endfor %}
+
+        </div>
+
+
+
+
+
+    {% else %}{# Sinon le tableau produits est vide  #}
+
+        <h4 class="text-center fst-italic text-danger">Il n'y a aucun produit pour le moment</h4>
+
+    {% endif %}
+
+
+{% endblock %}
+

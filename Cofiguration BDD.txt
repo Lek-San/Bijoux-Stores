@@ -1,0 +1,14 @@
+pour l'installer pensez bien à la bdd
+donc la créer : doctrine:database:create
+(attention au nom si vous ne l'avez pas déjà pour le votre il faudra alors le changer dans .env)
+pour envoyer les migrations en bdd
+doctrine:migrations:migrate
+
+
+vérifiez le nom de la bdd dans .env
+ce nom ne peut pas déjà exister
+php bin/console doctrine:database;create
+--> créer la bdd dans PhpMyAdmin
+(les migrations sont déjà créés donc pas besoin de make:migration)
+uniquement les envoyer sur phpMyAdmin
+php bin/console doctrine:migrations:migrate

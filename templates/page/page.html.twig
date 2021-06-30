@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %} {# étendre le fichier base.html.twig #}
+
+{% block title %}{{ parent() }} | Page{% endblock %}
+{# la fonction twig parent() permet de récupérer la valeur dans la base.html.twig et on peut rajouter une donnée à la suite pour personnaliser le title de la route par exemple #}
+
+{% block stylesheets %}
+
+
+    <style>
+
+        h1{
+            color:blue;
+        }
+    
+    </style>
+
+
+{% endblock %}
+
+{# 
+    on NE peut PAS placer un block dans un block
+    Quand on ouvre un block il faut le refermer
+    On ne peut pas appeler 2 fois le même
+    Mais on n'est pas obligé d'utiliser tous les block de la base.html.twig
+ #}
+
+{% block titreh1 %}Titre PAGE{% endblock %}
+
+{% block body %}
+
+    
+
+    {{ prenomTwig }}
+
+{% endblock %}
+
+
+{# commentaire #}
+
+{# 
+
+{{ variable }} ==> interpolation, afficher des variables  / fonction asset / path
+
+
+{% %}  ==> block / if / for / 
+
+
+
+
+
+#}
